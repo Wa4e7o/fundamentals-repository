@@ -1,0 +1,60 @@
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+
+namespace TruckTour
+{
+    class Program
+    {
+        static void Main(string[] args)
+        {
+            int n = int.Parse(global::System.Console.ReadLine());
+            Queue<int[]> stations = new Queue<int[]>();
+            int counter = 0;
+            FillTheQueue(n, stations);
+
+            while (true)
+            {
+                int fuelAmount = 0;
+
+                bool isFound = true;
+                foreach (var item in stations)
+                {
+                    fuelAmount += item[0];
+
+                    if (fuelAmount < item[1])
+                    {
+                        isFound = false;
+                        break;
+                    }
+                    fuelAmount -= item[1];
+                }
+                if (isFound)
+                {
+                    break;
+                }
+
+                counter++;
+
+                stations.Enqueue(stations.Dequeue());
+            }
+
+            Console.WriteLine(counter);
+
+        }
+        private static void FillTheQueue(int n, Queue<int[]> stations)
+        {
+            for (int i = 0; i < n; i++)
+            {
+                var input = Console.ReadLine()
+                    .Split()
+                    .Select(int.Parse)
+                    .ToArray();
+
+                stations.Enqueue(input);
+
+            }
+        }
+    }
+
+}
