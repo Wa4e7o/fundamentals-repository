@@ -42,7 +42,7 @@ namespace _3._Maximum_and_Minimum_Element
                     }
                 }
             }
-            Console.WriteLine(string.Join(", ", numbers));
+            Console.WriteLine(string.Join(", ", numbers)) ;
             
         }
     }
